@@ -8,6 +8,7 @@ export class ListedComponent extends Component {
         super(props);
         this.baseController = Controller;
         this.state = { tableData: [], loading: true };
+        this.AddNew = this.AddNew.bind(this);
     }
 
     componentDidMount() {
@@ -46,7 +47,9 @@ export class ListedComponent extends Component {
             <div>
                 <h1 id="tabelLabel" >List of {this.baseController}</h1>
                 {contents}
-
+                <button onClick={this.AddNew}>
+                    Add new element
+                </button>
             </div>)
     }
 
@@ -54,5 +57,9 @@ export class ListedComponent extends Component {
         const response = await fetch('api/' + this.baseController);
         const data = await response.json();
         this.setState({ tableData: data, loading: false });
+    }
+
+    AddNew() {
+
     }
 }

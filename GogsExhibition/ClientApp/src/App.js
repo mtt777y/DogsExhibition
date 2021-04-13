@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { SexList } from './components/SexList';
-import { ColorList } from './components/ColorList';
-import { TypesShowList } from './components/TypesShowsList';
-import { CountryList } from './components/CountryList';
+import { SexList } from './components/SexMeta/SexList';
+import { ColorList } from './components/_Listed/ColorList';
+import { TypesShowList } from './components/TypeShowMeta/TypesShowsList';
+import { CountryList } from './components/CountryMeta/CountryList';
 
 import './custom.css'
 

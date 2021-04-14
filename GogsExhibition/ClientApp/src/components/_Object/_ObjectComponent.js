@@ -1,63 +1,35 @@
-﻿import React, { Component } from 'react';
+﻿import { Modal } from 'bootstrap';
+import React, { Component } from 'react';
+import "./_Object.css";
 
-export class ListedComponent extends Component {
-    static displayName = ListedComponent.name;
+export class ObjectComponent extends Modal {
+    static displayName = "Modal";
     baseController;
 
-    constructor(props, Controller) {
-        super(props);
+    constructor(props, Controller, active, setActive) {
+        super(props, active, setActive);
         this.baseController = Controller;
-        this.state = { tableData: [], loading: true };
-        this.AddNew = this.AddNew.bind(this);
+    //    this.AddNew = this.AddNew.bind(this);
     }
 
-    componentDidMount() {
-        this.GetData();
-    }
-
-    renderTable() {
-        let tableData = this.state.tableData;
-        return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableData.map(Data =>
-                        <tr key={Data.id}>
-                            <td>{Data.id}</td>
-                            <td>{Data.name}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        );
-    }
+    //componentDidMount() {
+    //}
 
 
     render() {
-        let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : this.renderTable();
-
         return (
-            <div>
-                <h1 id="tabelLabel" >List of {this.baseController}</h1>
-                {contents}
-                <button onClick={this.AddNew}>
-                    Add new element
-                </button>
+            <div className='modal'>
+                <div className = 'modal__content'>
+                    <h1>YA NOVIY {this.baseController} ELEMENT!</h1>
+                </div>
             </div>)
     }
 
-    async GetData() {
-        const response = await fetch('api/' + this.baseController);
-        const data = await response.json();
-        this.setState({ tableData: data, loading: false });
-    }
+    //async GetData() {
+    //    const response = await fetch('api/' + this.baseController);
+    //    const data = await response.json();
+    //    this.setState({ tableData: data, loading: false });
+    //}
 
     AddNew() {
 

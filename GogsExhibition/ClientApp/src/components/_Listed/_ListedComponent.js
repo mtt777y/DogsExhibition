@@ -1,8 +1,12 @@
+import { Modal } from 'bootstrap';
 import React, { Component } from 'react';
+import { ObjectComponent } from '../_Object/_ObjectComponent';
 
 export class ListedComponent extends Component {
     static displayName = ListedComponent.name;
     baseController;
+    modalActive = false;
+    setModalActive
 
     constructor(props, Controller) {
         super(props);
@@ -43,6 +47,8 @@ export class ListedComponent extends Component {
             ? <p><em>Loading...</em></p>
             : this.renderTable();
 
+        let obj = new ObjectComponent(this.props, "sex", this.modalActive, this.setModalActive);
+
         return (
             <div>
                 <h1 id="tabelLabel" >List of {this.baseController}</h1>
@@ -50,6 +56,7 @@ export class ListedComponent extends Component {
                 <button onClick={this.AddNew}>
                     Add new element
                 </button>
+                {obj}
             </div>)
     }
 
@@ -60,6 +67,6 @@ export class ListedComponent extends Component {
     }
 
     AddNew() {
-
+        this.modalActive = true;
     }
 }

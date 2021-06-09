@@ -7,19 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GogsExhibition;
 using GogsExhibition.Classes;
+using NLog;
 
 namespace GogsExhibition.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColorsController : ControllerBase
+    public class ColorsController : OverloadedController
     {
-        private readonly DbSets _context;
-
-        public ColorsController(DbSets context)
+        public ColorsController(DbSets dbSets, ILogger logger) : base(dbSets, logger)
         {
-            _context = context;
         }
+
 
         // GET: api/Colors
         [HttpGet]

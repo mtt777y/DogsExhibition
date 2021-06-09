@@ -7,19 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GogsExhibition;
 using GogsExhibition.Classes;
+using NLog;
 
 namespace GogsExhibition.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TypeShowsController : ControllerBase
+    public class TypeShowsController : OverloadedController
     {
-        private readonly DbSets _context;
-
-        public TypeShowsController(DbSets context)
+        public TypeShowsController(DbSets dbSets, ILogger logger) : base(dbSets, logger)
         {
-            _context = context;
         }
+
 
         // GET: api/TypeShows
         [HttpGet]

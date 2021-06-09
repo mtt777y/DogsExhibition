@@ -7,24 +7,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GogsExhibition;
 using GogsExhibition.Classes;
+using NLog;
 
 namespace GogsExhibition.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CountriesController : ControllerBase
+    public class CountriesController : OverloadedController
     {
-        private readonly DbSets _context;
-
-        public CountriesController(DbSets context)
+        public CountriesController(DbSets dbSets, ILogger logger) : base(dbSets, logger)
         {
-            _context = context;
         }
 
         // GET: api/Countries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Country>>> GetCountries()
         {
+            _logger.Trace("ya getnulsya v controllere stran!");
             return await _context.Countries.ToListAsync();
         }
 

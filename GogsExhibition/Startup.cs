@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+//using Microsoft.Extensions.Logging;
+using NLog;
 
 namespace GogsExhibition
 {
@@ -29,7 +31,8 @@ namespace GogsExhibition
                 configuration.RootPath = "ClientApp/build";
             });
 
-            services.AddScoped(sp => new DbSets());
+            services.AddSingleton(sp => new DbSets());
+            services.AddSingleton<ILogger>(svc => LogManager.GetCurrentClassLogger());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

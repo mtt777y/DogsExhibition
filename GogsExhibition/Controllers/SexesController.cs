@@ -7,19 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GogsExhibition;
 using GogsExhibition.Classes;
+using NLog;
 
 namespace GogsExhibition.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SexesController : ControllerBase
+    public class SexesController : OverloadedController
     {
-        private readonly DbSets _context;
-
-        public SexesController(DbSets context)
+        public SexesController(DbSets dbSets, ILogger logger) : base(dbSets, logger)
         {
-            _context = context;
         }
+
 
         // GET: api/Sexes
         [HttpGet]

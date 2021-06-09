@@ -47,7 +47,7 @@ export class ListedComponent extends Component {
             ? <p><em>Loading...</em></p>
             : this.renderTable();
 
-        let obj = new ObjectComponent(this.props, "sex", this.modalActive, this.setModalActive);
+        //let obj = new ObjectComponent(this.props, "sex", this.modalActive, this.setModalActive);
 
         return (
             <div>
@@ -56,7 +56,7 @@ export class ListedComponent extends Component {
                 <button onClick={this.AddNew}>
                     Add new element
                 </button>
-                {obj}
+                
             </div>)
     }
 

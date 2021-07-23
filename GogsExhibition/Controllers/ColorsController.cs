@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GogsExhibition;
 using GogsExhibition.Classes;
 using NLog;
+using GogsExhibition.Controllers.Abstraction;
 
 namespace GogsExhibition.Controllers
 {

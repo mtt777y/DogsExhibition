@@ -9,7 +9,7 @@ using GogsExhibition;
 using GogsExhibition.Classes;
 using NLog;
 
-namespace GogsExhibition.Controllers
+namespace GogsExhibition.Controllers.Abstraction
 {
     public class OverloadedController : ControllerBase
     {

@@ -85,4 +85,13 @@ namespace GogsExhibition.Classes
     {
 
     }
+
+    public class User : DbObjActive
+    {
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public string Email { get; set; }
+    }
 }

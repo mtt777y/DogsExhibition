@@ -1,4 +1,5 @@
 using GogsExhibition.Controllers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,12 @@ namespace GogsExhibition
                 configuration.RootPath = "ClientApp/build";
             });
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
+
             services.AddSingleton(sp => new DbSets());
             services.AddSingleton<ILogger>(svc => LogManager.GetCurrentClassLogger());
         }
@@ -54,6 +61,9 @@ namespace GogsExhibition
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();    // аутентификация
+            app.UseAuthorization();     // авторизация
 
             app.UseEndpoints(endpoints =>
             {

@@ -93,5 +93,13 @@ namespace GogsExhibition.Classes
 
         [Required]
         public string Email { get; set; }
+
+        [Required]
+        public Role Role { get; set; }
+    }
+
+    public class Role : DbObjs
+    {
+
     }
 }

@@ -12,6 +12,10 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using GogsExhibition.Controllers.Abstraction;
+using System.IdentityModel.Tokens.Jwt;
+using GogsExhibition.Token;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace GogsExhibition.Controllers
 {
@@ -20,81 +24,66 @@ namespace GogsExhibition.Controllers
     public class AccountController : OverloadedController
     {
 
-        AccountController(DbSets dbSets, ILogger logger) : base(dbSets, logger)
+        public AccountController(DbSets dbSets, ILogger logger) : base(dbSets, logger)
         {
 
         }
 
-        [HttpGet]
-        public IActionResult Login()
+        private List<User> people = new List<User>
         {
-            return View();
-        }
+            new User {Email="admin@gmail.com", Password="12345", Role = new Role { Name = "admin" } },
+            new User {Email="qwerty@gmail.com", Password="55555", Role = new Role { Name = "name" } }
+        };
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel model)
+        [HttpPost("/token")]
+        public IActionResult Token(string username, string password)
         {
-            if (ModelState.IsValid)
+            var identity = GetIdentity(username, password);
+            if (identity == null)
             {
-                User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
-                if (user != null)
-                {
-                    await Authenticate(model.Email); // аутентификация
-
-                    return RedirectToAction("Index", "Home");
-                }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                return BadRequest(new { errorText = "Invalid username or password." });
             }
-            return View(model);
-        }
 
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
+            var now = DateTime.UtcNow;
+            // создаем JWT-токен
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthOption.ISSUER,
+                    audience: AuthOption.AUDIENCE,
+                    notBefore: now,
+                    claims: identity.Claims,
+                    expires: now.Add(TimeSpan.FromMinutes(AuthOption.LIFETIME)),
+                    signingCredentials: new SigningCredentials(AuthOption.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(AutorizationModel model)
-        {
-            if (ModelState.IsValid)
+            var response = new
             {
-                User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-                if (user == null)
+                access_token = encodedJwt,
+                username = identity.Name
+            };
+
+            //return JsonConvert.SerializeObject(response);
+            return Ok(JsonConvert.SerializeObject(response));
+        }
+
+        private ClaimsIdentity GetIdentity(string username, string password)
+        {
+            User person = people.FirstOrDefault(x => x.Email == username && x.Password == password);
+            if (person != null)
+            {
+                var claims = new List<Claim>
                 {
-                    // добавляем пользователя в бд
-                    _context.Users.Add(new User { Email = model.Email, Password = model.Password });
-                    await _context.SaveChangesAsync();
-
-                    await Authenticate(model.Email); // аутентификация
-
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Email),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Role.Name)
+                };
+                ClaimsIdentity claimsIdentity =
+                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType);
+                return claimsIdentity;
             }
-            return View(model);
-        }
 
-        private async Task Authenticate(string userName)
-        {
-            // создаем один claim
-            var claims = new List<Claim>
-                                {
-                                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
-                                };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-        }
+            // если пользователя не найдено
+            return null;
 
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
         }
     }
 }

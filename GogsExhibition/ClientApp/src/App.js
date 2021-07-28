@@ -6,11 +6,13 @@ import { SexList } from './components/SexMeta/SexList';
 import { ColorList } from './components/ColorMeta/ColorList';
 import { TypesShowList } from './components/TypeShowMeta/TypesShowsList';
 import { CountryList } from './components/CountryMeta/CountryList';
+import { Autorization } from './autorization/Autorization'; 
 
 import './custom.css'
 
 export default class App extends Component {
     static displayName = App.name;
+    static token;
 
     render() {
         return (
@@ -20,6 +22,7 @@ export default class App extends Component {
                 <Route path='/color-list' component={ColorList} />
                 <Route path='/typeshow-list' component={TypesShowList} />
                 <Route path='/country-list' component={CountryList} />
+                <Route path='/loginpage' component={Autorization} />
             </Layout>
         );
     }

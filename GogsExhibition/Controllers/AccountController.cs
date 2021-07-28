@@ -36,9 +36,9 @@ namespace GogsExhibition.Controllers
         };
 
         [HttpPost("/token")]
-        public IActionResult Token(string username, string password)
+        public IActionResult Token([FromBody] Classes.NotMapped.LoginPass loginPass)
         {
-            var identity = GetIdentity(username, password);
+            var identity = GetIdentity(loginPass.Login, loginPass.Pass);
             if (identity == null)
             {
                 return BadRequest(new { errorText = "Invalid username or password." });

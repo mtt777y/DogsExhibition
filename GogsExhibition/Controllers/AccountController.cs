@@ -20,8 +20,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GogsExhibition.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     [AllowAnonymous]
     public class AccountController : OverloadedController<User>
     {

@@ -12,8 +12,6 @@ using GogsExhibition.Controllers.Abstraction;
 
 namespace GogsExhibition.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class SexesController : OverloadedController<Sex>
     {
         public SexesController(DbSets dbSets, ILogger logger) : base(dbSets, logger)

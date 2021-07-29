@@ -12,8 +12,6 @@ using GogsExhibition.Controllers.Abstraction;
 
 namespace GogsExhibition.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class TypeShowsController : OverloadedController<TypeShow>
     {
         public TypeShowsController(DbSets dbSets, ILogger logger) : base(dbSets, logger)

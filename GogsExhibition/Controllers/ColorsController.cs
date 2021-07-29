@@ -12,8 +12,6 @@ using GogsExhibition.Controllers.Abstraction;
 
 namespace GogsExhibition.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class ColorsController : OverloadedController<Color>
     {
         public ColorsController(DbSets dbSets, ILogger logger) : base(dbSets, logger)

@@ -35,13 +35,13 @@ namespace GogsExhibition
                 configuration.RootPath = "ClientApp/build";
             });
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => //CookieAuthenticationOptions
-                {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
-                });
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options => //CookieAuthenticationOptions
+            //    {
+            //        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+            //    });
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.RequireHttpsMetadata = false;

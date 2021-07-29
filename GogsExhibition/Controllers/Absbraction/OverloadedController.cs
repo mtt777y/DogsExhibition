@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using GogsExhibition;
 using GogsExhibition.Classes;
 using NLog;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GogsExhibition.Controllers.Abstraction
 {
+    [Authorize]
     public class OverloadedController : ControllerBase
     {
         protected DbSets _context;

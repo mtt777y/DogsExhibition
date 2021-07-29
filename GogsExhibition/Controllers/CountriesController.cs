@@ -9,11 +9,12 @@ using GogsExhibition;
 using GogsExhibition.Classes;
 using NLog;
 using GogsExhibition.Controllers.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GogsExhibition.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController]    
     public class CountriesController : OverloadedController
     {
         public CountriesController(DbSets dbSets, ILogger logger) : base(dbSets, logger)

@@ -1,6 +1,7 @@
 import { Modal } from 'bootstrap';
 import React, { Component } from 'react';
 import { ObjectComponent } from '../_Object/_ObjectComponent';
+import App from '../../App';
 
 export class ListedComponent extends Component {
     static displayName = ListedComponent.name;
@@ -61,9 +62,19 @@ export class ListedComponent extends Component {
     }
 
     async GetData() {
-        const response = await fetch('api/' + this.baseController);
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization' : 'Bearer ' + App.token}
+        };
+
+        const response = await fetch('api/' + this.baseController, requestOptions);
         const data = await response.json();
-        this.setState({ tableData: data, loading: false });
+        if (response.status == 200) {
+            this.setState({ tableData: data, loading: false });
+        }
     }
 
     AddNew() {

@@ -16,11 +16,13 @@ using System.IdentityModel.Tokens.Jwt;
 using GogsExhibition.Token;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GogsExhibition.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AccountController : OverloadedController
     {
 

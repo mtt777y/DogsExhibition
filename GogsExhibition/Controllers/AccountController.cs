@@ -23,7 +23,7 @@ namespace GogsExhibition.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
-    public class AccountController : OverloadedController
+    public class AccountController : OverloadedController<User>
     {
 
         public AccountController(DbSets dbSets, ILogger logger) : base(dbSets, logger)

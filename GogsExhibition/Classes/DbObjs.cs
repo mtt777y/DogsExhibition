@@ -12,6 +12,11 @@ namespace GogsExhibition.Classes
 
         [MaxLength(200), Required]
         public string Name {get; set; }
+
+        //public DbObjs(string _Name)
+        //{
+        //    Name = _Name;
+        //}
     }
 
     public abstract class DbObjActive : DbObjs
@@ -23,7 +28,7 @@ namespace GogsExhibition.Classes
         public Sex Sex { get; set; }
     }
 
-    public class Dog : DbObjActive
+    public class Dog : DbObjActive, IDbMapped
     {
         [Required]
         public Breed Breed { get; set; }
@@ -38,34 +43,34 @@ namespace GogsExhibition.Classes
         public float Leght { get; set; }
     }
 
-    public class Owner : DbObjActive
+    public class Owner : DbObjActive, IDbMapped
     {
         public Country Country { get; set; }
     }
 
-    public class Breed : DbObjs
+    public class Breed : DbObjs, IDbMapped
     {
         public float MaxWeight { get; set; }
 
         public float MaxGrowth { get; set; }
     }
 
-    public class Country : DbObjs
+    public class Country : DbObjs, IDbMapped
     {
         public byte[] Flag { get; set; }
     }
 
-    public class Specification : DbObjs
+    public class Specification : DbObjs, IDbMapped
     {
         
     }
 
-    public class Color : DbObjs
+    public class Color : DbObjs, IDbMapped
     {
 
     }
 
-    public class Show : DbObjs
+    public class Show : DbObjs, IDbMapped
     {
         [Required]
         public DateTime DateOf { get; set; }
@@ -76,17 +81,17 @@ namespace GogsExhibition.Classes
         public Country Country { get; set; }
     }
 
-    public class TypeShow : DbObjs
+    public class TypeShow : DbObjs, IDbMapped
     {
 
     }
 
-    public class Sex : DbObjs
+    public class Sex : DbObjs, IDbMapped
     {
 
     }
 
-    public class User : DbObjActive
+    public class User : DbObjActive, IDbMapped
     {
         [Required]
         public string Password { get; set; }
@@ -98,7 +103,7 @@ namespace GogsExhibition.Classes
         public Role Role { get; set; }
     }
 
-    public class Role : DbObjs
+    public class Role : DbObjs, IDbMapped
     {
 
     }

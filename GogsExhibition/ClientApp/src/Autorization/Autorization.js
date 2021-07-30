@@ -53,10 +53,12 @@ export class Autorization extends Component {
             <div>
                 {contents}
                 <p>
-                    <input type="text" name="login" value={this.inputLogin} onChange={(event) => this.lp.Login = event.target.value}/>
+                    <em>Логин:</em>
+                    <input type="text" name="login" onChange={(event) => this.lp.Login = event.target.value}/>
                 </p>
                 <p>
-                    <input type="password" name="pass" value={this.inputPass} onChange={(event) => this.lp.Pass = event.target.value}/>
+                    <em>Пароль:</em>
+                    <input type="password" name="pass" onChange={(event) => this.lp.Pass = event.target.value}/>
                 </p>
                 <p>
                     <button onClick={this.tryLogin}>

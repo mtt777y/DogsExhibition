@@ -48,16 +48,14 @@ export class ListedComponent extends Component {
             : this.renderTable();
 
         let objContent = this.state.objEditorOpen
-            ? <p><ObjectComponent/></p>
-            //? <p><em>тут копонент</em></p>
-            : <p><em>...</em></p>;
+            ? <p><ObjectComponent controller={this.baseController} /></p>
+            : <button onClick={this.AddNew}>
+                Add new element
+              </button>;
 
         return (
             <div>
                 {objContent}
-                <button onClick={this.AddNew}>
-                    Add new element
-                </button>
                 <h1 id="tabelLabel" >List of {this.baseController}</h1>
                 {contents}            
             </div>)

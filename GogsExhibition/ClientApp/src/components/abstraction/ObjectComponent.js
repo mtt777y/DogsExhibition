@@ -5,14 +5,31 @@ import "./Object.css";
 export class ObjectComponent extends Component {
     baseController;
 
+    inputId;
+    inputName;
+
     constructor(props) {
         super(props);
-        //this.baseController = Controller;
+        this.baseController = props.controller;
     }
 
     render() {
         return (
-                    <h1>YA NOVIY ELEMENT!</h1>)
+            <div>
+                <em>id:</em>
+                <p>
+                    <input type="text" name="id" value={this.inputId} onChange={(event) => this.lp.Login = event.target.value}/>
+                </p>
+                <em>Name:</em>
+                <p>
+                    <input type="text" name="name" value={this.inputName} onChange={(event) => this.lp.Pass = event.target.value}/>
+                </p>
+                <p>
+                    <button>
+                        Save
+                    </button>
+                </p>
+            </div>)
     }
 
     //async GetData() {

@@ -51,7 +51,7 @@ namespace GogsExhibition.Controllers.Abstraction
         // POST: api/Countries
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<T>> PostCountry(string entityName)
+        public async Task<ActionResult<T>> PostCountry([FromBody] string entityName)
         {
 
             T entity = new T() { Name = entityName };

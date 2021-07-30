@@ -11,8 +11,9 @@ export class ListedComponent extends Component {
     constructor(props, Controller) {
         super(props);
         this.baseController = Controller;
-        this.state = { tableData: [], loading: true, objEditorOpen: false};
+        this.state = { tableData: [], loading: true, objEditorOpen: false };
         this.AddNew = this.AddNew.bind(this);
+        this.CancelNew = this.CancelNew.bind(this);
     }
 
     componentDidMount() {
@@ -48,7 +49,15 @@ export class ListedComponent extends Component {
             : this.renderTable();
 
         let objContent = this.state.objEditorOpen
-            ? <p><ObjectComponent controller={this.baseController} /></p>
+            ?
+            <div>
+                <p><ObjectComponent controller={this.baseController} parent={this}/></p>
+                <p>
+                    <button onClick={this.CancelNew}>
+                       Отменить
+                    </button>
+                </p>
+            </div>
             : <button onClick={this.AddNew}>
                 Add new element
               </button>;
@@ -57,7 +66,7 @@ export class ListedComponent extends Component {
             <div>
                 {objContent}
                 <h1 id="tabelLabel" >List of {this.baseController}</h1>
-                {contents}            
+                {contents}
             </div>)
     }
 
@@ -67,7 +76,8 @@ export class ListedComponent extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization' : 'Bearer ' + App.token}
+                'Authorization': 'Bearer ' + App.token
+            }
         };
 
         const response = await fetch('api/' + this.baseController, requestOptions);
@@ -78,6 +88,15 @@ export class ListedComponent extends Component {
     }
 
     AddNew() {
-        this.setState({objEditorOpen: true });
+        this.setState({ objEditorOpen: true });
+    }
+
+    CancelNew() {
+        this.setState({ objEditorOpen: false });
+    }
+
+    AfterSave() {
+        this.CancelNew()
+        this.GetData();
     }
 }

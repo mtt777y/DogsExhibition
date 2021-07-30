@@ -1,45 +1,51 @@
 import { Modal } from 'bootstrap';
 import React, { Component } from 'react';
 import "./Object.css";
+import App from '../../App';
 
 export class ObjectComponent extends Component {
     baseController;
-
-    inputId;
-    inputName;
+    entityName;
+    parent;
 
     constructor(props) {
         super(props);
         this.baseController = props.controller;
+        this.parent = props.parent;
+        this.SaveEntity = this.SaveEntity.bind(this);
     }
 
     render() {
         return (
             <div>
-                <em>id:</em>
-                <p>
-                    <input type="text" name="id" value={this.inputId} onChange={(event) => this.lp.Login = event.target.value}/>
-                </p>
                 <em>Name:</em>
                 <p>
-                    <input type="text" name="name" value={this.inputName} onChange={(event) => this.lp.Pass = event.target.value}/>
+                    <input type="text" name="name" value={this.entityName} onChange={(event) => this.entityName = event.target.value}/>
                 </p>
                 <p>
-                    <button>
-                        Save
+                    <button onClick = {this.SaveEntity}>
+                        Cохранить
                     </button>
                 </p>
             </div>)
     }
 
-    //async GetData() {
-    //    const response = await fetch('api/' + this.baseController);
-    //    const data = await response.json();
-    //    this.setState({ tableData: data, loading: false });
-    //}
+    async SaveEntity() {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + App.token
+            },
+            body: JSON.stringify(this.entityName)
+        };
 
-    AddNew() {
-
+        const response = await fetch('api/' + this.baseController, requestOptions);
+        const data = await response.json();
+        if (response.status == 201) {
+            this.parent.AfterSave();
+        }
     }
 }
 

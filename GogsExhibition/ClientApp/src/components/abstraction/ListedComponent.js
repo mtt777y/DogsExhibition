@@ -1,18 +1,17 @@
 import { Modal } from 'bootstrap';
 import React, { Component } from 'react';
-import { ObjectComponent } from '../_Object/_ObjectComponent';
 import App from '../../App';
+import ObjectComponent from './ObjectComponent';
 
 export class ListedComponent extends Component {
     static displayName = ListedComponent.name;
     baseController;
-    modalActive = false;
     setModalActive
 
     constructor(props, Controller) {
         super(props);
         this.baseController = Controller;
-        this.state = { tableData: [], loading: true };
+        this.state = { tableData: [], loading: true, objEditorOpen: false};
         this.AddNew = this.AddNew.bind(this);
     }
 
@@ -48,16 +47,19 @@ export class ListedComponent extends Component {
             ? <p><em>Loading...</em></p>
             : this.renderTable();
 
-        //let obj = new ObjectComponent(this.props, "sex", this.modalActive, this.setModalActive);
+        let objContent = this.state.objEditorOpen
+            ? <p><ObjectComponent/></p>
+            //? <p><em>тут копонент</em></p>
+            : <p><em>...</em></p>;
 
         return (
             <div>
-                <h1 id="tabelLabel" >List of {this.baseController}</h1>
-                {contents}
+                {objContent}
                 <button onClick={this.AddNew}>
                     Add new element
                 </button>
-                
+                <h1 id="tabelLabel" >List of {this.baseController}</h1>
+                {contents}            
             </div>)
     }
 
@@ -78,6 +80,6 @@ export class ListedComponent extends Component {
     }
 
     AddNew() {
-        this.modalActive = true;
+        this.setState({objEditorOpen: true });
     }
 }

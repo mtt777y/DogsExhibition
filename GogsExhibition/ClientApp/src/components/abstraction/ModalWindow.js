@@ -1,6 +1,6 @@
 ﻿import { Modal } from 'bootstrap';
 import React, { Component } from 'react';
-import "./_Object.css";
+import "./Object.css";
 
 export class ObjectComponent extends Modal {
     static displayName = "Modal";

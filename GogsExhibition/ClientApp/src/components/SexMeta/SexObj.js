@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { ObjComponent } from '../_Object/_ObjectComponent'
+import { ObjectComponent } from '../abstraction/ObjectComponent'
 
-export class SexList extends ObjComponent {
+export class SexList extends ObjectComponent {
     constructor(prop, controller, active, setActive) {
         super(prop, controller, active, setActive);
         this.baseController = 'sexes';

@@ -20,7 +20,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GogsExhibition.Controllers
 {
-    [AllowAnonymous]
+    
     public class AccountController : OverloadedController<User>
     {
 
@@ -35,6 +35,7 @@ namespace GogsExhibition.Controllers
             new User {Email="qwerty@gmail.com", Password="55555", Role = new Role { Name = "name" } }
         };
 
+        [AllowAnonymous]
         [HttpPost("/token")]
         public IActionResult Token([FromBody] Classes.NotMapped.LoginPass loginPass)
         {

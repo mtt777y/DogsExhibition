@@ -6,6 +6,8 @@ import { SexList } from './components/SexMeta/SexList';
 import { ColorList } from './components/ColorMeta/ColorList';
 import { TypesShowList } from './components/TypeShowMeta/TypesShowsList';
 import { CountryList } from './components/CountryMeta/CountryList';
+import { UserList } from './components/UserMeta/UserList';
+import { RoleList } from './components/RoleMeta/RoleList';
 import { Autorization } from './autorization/Autorization'; 
 
 import './custom.css'
@@ -23,6 +25,8 @@ export default class App extends Component {
                 <Route path='/color-list' component={ColorList} />
                 <Route path='/typeshow-list' component={TypesShowList} />
                 <Route path='/country-list' component={CountryList} />
+                <Route path='/user-list' component={UserList} />
+                <Route path='/role-list' component={RoleList} />
                 <Route path='/loginpage' component={Autorization} />
             </Layout>
         );

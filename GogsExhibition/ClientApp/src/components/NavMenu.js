@@ -47,6 +47,12 @@ export class NavMenu extends Component {
                     <NavItem>
                         <NavLink tag={Link} className="text-dark" to="/country-list">List of countries</NavLink>
                     </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} className="text-dark" to="/user-list">List of users</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} className="text-dark" to="/role-list">List of roles</NavLink>
+                    </NavItem>
                 </ul>
 
         }
@@ -69,7 +75,7 @@ export class NavMenu extends Component {
                         <NavbarBrand tag={Link} to="/">GogsExhibition</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-                                {content}
+                            {content}
                         </Collapse>
                     </Container>
                 </Navbar>

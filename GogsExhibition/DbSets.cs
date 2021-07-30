@@ -25,6 +25,7 @@ namespace GogsExhibition
         public DbSet<Sex> Sexs { get; set; }
         public DbSet<TypesOfShow> TypesOfShows { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder contextOptionsBuilder)

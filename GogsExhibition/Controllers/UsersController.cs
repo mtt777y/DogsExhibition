@@ -4,9 +4,9 @@ using GogsExhibition.Controllers.Abstraction;
 
 namespace GogsExhibition.Controllers
 {
-    public class SexesController : OverloadedController<Sex>
+    public class UsersController : OverloadedController<User>
     {
-        public SexesController(DbSets dbSets, ILogger logger) : base(dbSets, logger)
+        public UsersController(DbSets dbSets, ILogger logger) : base(dbSets, logger)
         {
         }
     }

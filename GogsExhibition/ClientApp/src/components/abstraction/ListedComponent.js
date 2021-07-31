@@ -6,11 +6,13 @@ import ObjectComponent from './ObjectComponent';
 export class ListedComponent extends Component {
     static displayName = ListedComponent.name;
     baseController;
-    setModalActive
+    additionalFields;
 
-    constructor(props, Controller) {
+
+    constructor(props, Controller, AdditionalFields) {
         super(props);
         this.baseController = Controller;
+        this.additionalFields = AdditionalFields;
         this.state = { tableData: [], loading: true, objEditorOpen: false };
         this.AddNew = this.AddNew.bind(this);
         this.CancelNew = this.CancelNew.bind(this);
@@ -22,12 +24,14 @@ export class ListedComponent extends Component {
 
     renderTable() {
         let tableData = this.state.tableData;
+
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        {this.additionalFields.map(f => <th>{f}</th>)}
                     </tr>
                 </thead>
                 <tbody>

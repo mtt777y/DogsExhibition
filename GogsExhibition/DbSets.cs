@@ -30,7 +30,7 @@ namespace GogsExhibition
 
         protected override void OnConfiguring(DbContextOptionsBuilder contextOptionsBuilder)
         {
-            contextOptionsBuilder.UseSqlServer("Server=MATT-PC\\SQLEXPRESS;DataBase = Dogs; User ID=sa;Password=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            contextOptionsBuilder.UseSqlServer("Server=MSI\\SQLEXPRESS;DataBase = Dogs; User ID=sa;Password=sa;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //base.OnConfiguring(contextOptionsBuilder);
         }
 

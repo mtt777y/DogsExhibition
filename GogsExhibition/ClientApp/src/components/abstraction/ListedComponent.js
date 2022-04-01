@@ -12,7 +12,8 @@ export class ListedComponent extends Component {
     constructor(props, Controller, AdditionalFields) {
         super(props);
         this.baseController = Controller;
-        this.additionalFields = AdditionalFields;
+        //this.additionalFields = AdditionalFields;
+        this.additionalFields = [];
         this.state = { tableData: [], loading: true, objEditorOpen: false };
         this.AddNew = this.AddNew.bind(this);
         this.CancelNew = this.CancelNew.bind(this);

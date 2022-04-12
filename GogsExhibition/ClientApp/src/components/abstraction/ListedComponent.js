@@ -12,8 +12,12 @@ export class ListedComponent extends Component {
     constructor(props, Controller, AdditionalFields) {
         super(props);
         this.baseController = Controller;
-        //this.additionalFields = AdditionalFields;
-        this.additionalFields = [];
+        if (AdditionalFields == null) {
+            this.additionalFields = []
+        }
+        else {
+            this.additionalFields = AdditionalFields;
+        }
         this.state = { tableData: [], loading: true, objEditorOpen: false };
         this.AddNew = this.AddNew.bind(this);
         this.CancelNew = this.CancelNew.bind(this);
@@ -40,6 +44,7 @@ export class ListedComponent extends Component {
                         <tr key={Data.id}>
                             <td>{Data.id}</td>
                             <td>{Data.name}</td>
+                            {this.additionalFields.map(f => <td>{Data.name}</td>)}
                         </tr>
                     )}
                 </tbody>

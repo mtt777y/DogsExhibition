@@ -8,7 +8,9 @@ import { TypesShowList } from './components/TypeShowMeta/TypesShowsList';
 import { CountryList } from './components/CountryMeta/CountryList';
 import { UserList } from './components/UserMeta/UserList';
 import { RoleList } from './components/RoleMeta/RoleList';
-import { Autorization } from './autorization/Autorization'; 
+import { Autorization } from './autorization/Autorization';
+import { OwnerList } from './components/OwnerMeta/OwnerList';
+
 
 import './custom.css'
 
@@ -27,6 +29,7 @@ export default class App extends Component {
                 <Route path='/country-list' component={CountryList} />
                 <Route path='/user-list' component={UserList} />
                 <Route path='/role-list' component={RoleList} />
+                <Route path='/owner-list' component={OwnerList} />
                 <Route path='/loginpage' component={Autorization} />
             </Layout>
         );

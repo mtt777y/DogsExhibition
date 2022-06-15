@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  gogsexhibition:
+    image: ${DOCKER_REGISTRY-}gogsexhibition
+    build:
+      context: .
+      dockerfile: GogsExhibition\Dockerfile
